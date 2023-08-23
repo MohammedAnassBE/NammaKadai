@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for ('static',filename='style.css')}}">
+  {% if msg %}
+  <script>
+    window.onload = function() {
+      alert("Enter the valid values");
+    };
+  </script>
+  {% endif %}
+</head>
+<body>
+  <div class="container">
+    <h1>Main Branch</h1>
+    <h1>Add Products</h1>
+    <form action="/addproduct" method="post">
+      <div class="product-entry">
+        <label for="id">Id</label>
+        <input type="text" id="id" name="id" required>
+        <label for="product">Product</label>
+        <input type="text" id="product" name="product" required>
+      </div>
+      <div class="product-entry">
+        <label for="price">Price</label>
+        <input type="number" id="price" name="price" required>
+        <label for="count">Count</label>
+        <input type="number" id="count" name="count" required>
+      </div>
+      <input type="submit" name="Add" value="Add">
+    </form>
+    <br><br>
+    <h1>Product List</h1>
+    <ul class="product-list">
+      {% for i in value %}
+      <li class="product-entry">
+        <label for="id">Id</label>
+        <input type="number" id="id" name="id" value={{i[0]}} readonly>
+        <label for="product">Product</label>
+        <input type="text" id="product" name="product" value={{i[1]}} readonly>
+        <label for="price">Price</label>
+        <input type="number" id="price" name="price" value={{i[2]}} readonly>
+        <label for="count">Count</label>
+        <input type="number" id="count" name="count" value={{i[3]}} readonly>
+      </li>
+      {% endfor %}
+    </ul>
+
+    
+    <h1>Remove Product</h1>
+    <form class="remove-form" action="/remove" method="post">
+      <div class="product-entry">
+        <label for="remove-id">Product id</label>
+        <input type="number" id="remove-id" name="id" required>
+      </div>
+      <input type="submit" name="remove" value="Remove">
+    </form>
+
+
+    <h1>Update Product</h1>
+    <form class="update-form" action="/update" method="post">
+      <div class="product-entry">
+        <label for="update-id">Product id</label>
+        <input type="number" id="update-id" name="id" required>
+        <label for="update-count">Product count</label>
+        <input type="number" id="update-count" name="count" required>
+      </div>
+      <input type="submit" name="update" value="Update">
+    </form>
+    <br><br>
+    <form action="/logout" method="post">
+      <input type="submit" name="logout" value="logout">
+    </form>
+  </div>
+</body>
+</html>

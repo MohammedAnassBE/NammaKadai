@@ -1,0 +1,16 @@
+$DATABASE:
+	create database aerele;
+	use aerele;
+$TABLE'S:
+$	cash:
+		create table cash (balance int(5),id int(5));
+$	items:
+		create table items(id int(5) primary key,product varchar(20),price int(5),count int(5));
+$	purchase:
+		create table purchase(id int(5) primary key,product varchar(20),price int(5),count int(5),amount int(5));
+$	sales:
+		create table sales(user varchar(20),item varchar(20),costprice int(5),soldprice int(5),profit int(5),quantity int(5),time timestamp default current_timestamp);
+$	temp:
+		create table temp(id int(5) primary key,product varchar(50),price int(5),quantity int(5),amount int(5));
+$	user:
+		create table user(username varchar(20) primary key,password varchar(20));

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for ('static',filename='style.css')}}">
+      {% if msg %}
+      <script>
+        window.onload = function() {
+          alert("Enter the valid Id and valid count");
+        };
+      </script>
+      {% endif %}
+</head>
+<body>
+    {% if name %}
+    <div class ="container">
+        <h1>Buy Products</h1>
+        <form action="/buy/{{name}}" method="post">
+            <div class="product-entry">
+                <label for="id">Id</label>
+                <input type="number" id="id" name="id" required>
+            </div>
+            <div class="product-entry">
+                <label for="count">Count</label>
+                <input type="number" id="count" name="count" required>
+            </div>
+            <input type="submit" name="Add" value="Add">
+        </form>
+    {% endif %}    
+    <h1>Available Products</h1>
+    <ul class="product-list">
+      {% for i in value %}
+      <li class="product-entry">
+        <label for="id">Id</label>
+        <input type="number" id="id" name="id" value={{i[0]}} readonly>
+        <label for="product">Product</label>
+        <input type="text" id="product" name="product" value={{i[1]}} readonly>
+        <label for="price">Price</label>
+        <input type="number" id="price" name="price" value={{i[2]+3}} readonly>
+        <label for="count">Count</label>
+        <input type="number" id="count" name="count" value={{i[3]}} readonly>
+      </li>
+      {% endfor %}
+    </ul>
+    <h1>Products you had bought</h1>
+    <ul class="product-list">
+      {% for i in value1 %}
+      <li class="product-entry">
+        <label for="id">Id</label>
+        <input type="number" id="id" name="id" value={{i[0]}} readonly>
+        <label for="product">Product</label>
+        <input type="text" id="product" name="product" value={{i[1]}} readonly>
+        <label for="price">Price</label>
+        <input type="number" id="price" name="price" value={{i[2]}} readonly>
+        <label for="count">Count</label>
+        <input type="number" id="count" name="count" value={{i[3]}} readonly>
+        <label for="count">Amount</label>
+        <input type="number" id="count" name="count" value={{i[4]}} readonly>
+      </li>
+      {% endfor %}
+    </ul>
+    <form action="/logout" method="post">
+      <input type="submit" name="logout" value="logout">
+    </form>   
+</body>
+</html>
